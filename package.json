@@ -1,0 +1,44 @@
+{
+  "name": "mozjpeg",
+  "version": "0.1.0",
+  "description": "mozjpeg wrapper that makes it seamlessly available as a local dependency",
+  "license": "MIT",
+  "repository": "kevva/mozjpeg",
+  "author": {
+    "name": "Kevin Mårtensson",
+    "email": "kevinmartensson@gmail.com",
+    "url": "https://github.com/kevva"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "bin": {
+    "mozjpeg": "cli.js"
+  },
+  "scripts": {
+    "postinstall": "node index.js",
+    "test": "mocha --reporter list --timeout 0"
+  },
+  "files": [
+    "cli.js",
+    "index.js"
+  ],
+  "keywords": [
+    "jpeg",
+    "jpg",
+    "img",
+    "image",
+    "compress",
+    "minify",
+    "optimize"
+  ],
+  "dependencies": {
+    "bin-wrapper": "^0.2.0",
+    "chalk": "^0.4.0"
+  },
+  "devDependencies": {
+    "bin-check": "^0.1.0",
+    "mocha": "^1.18.2",
+    "rimraf": "^2.2.6"
+  }
+}
