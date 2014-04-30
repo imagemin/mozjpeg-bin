@@ -21,12 +21,14 @@ execFile(mozjpeg, ['-v'], function (err, stdout, stderr) {
 
 ## CLI
 
-You can also use it as a CLI app by installing it globally:
-
 ```bash
 $ npm install --global mozjpeg
 ```
 
+```bash
+$ mozjpeg --help
+```
+
 ## License
 
-[MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Kevin Mårtensson](http://kevinmartensson.com)
+MIT © [Kevin Mårtensson](http://kevinmartensson.com)
