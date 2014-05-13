@@ -30,10 +30,12 @@
     "image",
     "compress",
     "minify",
+    "mozjpeg",
     "optimize"
   ],
   "dependencies": {
-    "bin-wrapper": "^0.2.0",
+    "bin-build": "^0.1.0",
+    "bin-wrapper": "^0.3.0",
     "chalk": "^0.4.0"
   },
   "devDependencies": {
