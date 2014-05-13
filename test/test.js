@@ -27,7 +27,7 @@ describe('mozjpeg()', function () {
 
         builder.build(function (err) {
             assert(!err);
-            assert(fs.existsSync(path.join(tmp, 'mozjpeg')));
+            assert(fs.existsSync(path.join(tmp, 'jpegtran')));
             cb();
         });
     });
