@@ -25,7 +25,8 @@ fs.exists(bin.use(), function (exists) {
             .cfg('autoreconf -fiv && ./configure --prefix="' + bin.dest() + '" --bindir="' + bin.dest() + '" --libdir="' + bin.dest() + '"')
             .make('make && make install');
 
-        console.log("Building mozjpeg...");
+        console.log('building mozjpeg');
+
         return builder.build(function (err) {
             if (err) {
                 return console.log(chalk.red('✗ ' + err));
