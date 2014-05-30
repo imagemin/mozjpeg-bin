@@ -10,7 +10,7 @@ var path = require('path');
  * Initialize a new BinWrapper
  */
 
-var bin = new BinWrapper()
+var bin = new BinWrapper ({ global: false })
     .dest(path.join(__dirname, 'vendor'))
     .use('jpegtran');
 
@@ -25,6 +25,7 @@ fs.exists(bin.use(), function (exists) {
             .cfg('autoreconf -fiv && ./configure --prefix="' + bin.dest() + '" --bindir="' + bin.dest() + '" --libdir="' + bin.dest() + '"')
             .make('make && make install');
 
+        console.log("Building mozjpeg...");
         return builder.build(function (err) {
             if (err) {
                 return console.log(chalk.red('✗ ' + err));
