@@ -1,6 +1,6 @@
 {
   "name": "mozjpeg",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "mozjpeg wrapper that makes it seamlessly available as a local dependency",
   "license": "MIT",
   "repository": "kevva/mozjpeg",
@@ -16,12 +16,13 @@
     "mozjpeg": "cli.js"
   },
   "scripts": {
-    "postinstall": "node index.js",
+    "postinstall": "node postinstall.js",
     "test": "mocha --reporter list --timeout 0"
   },
   "files": [
     "cli.js",
-    "index.js"
+    "index.js",
+    "postinstall.js"
   ],
   "keywords": [
     "jpeg",
