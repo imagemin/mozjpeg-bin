@@ -17,7 +17,7 @@
   },
   "scripts": {
     "postinstall": "node index.js",
-    "test": "mocha --reporter list --timeout 50000"
+    "test": "mocha --reporter list --timeout 150000"
   },
   "files": [
     "cli.js",
