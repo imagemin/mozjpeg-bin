@@ -17,7 +17,7 @@
   },
   "scripts": {
     "postinstall": "node index.js",
-    "test": "mocha --reporter list --timeout 0"
+    "test": "mocha --reporter list --timeout 50000"
   },
   "files": [
     "cli.js",
@@ -36,7 +36,7 @@
   "dependencies": {
     "bin-build": "^0.1.0",
     "bin-wrapper": "^0.3.0",
-    "chalk": "^0.4.0"
+    "log-symbols": "^1.0.0"
   },
   "devDependencies": {
     "bin-check": "^0.1.0",

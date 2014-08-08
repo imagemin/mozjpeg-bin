@@ -2,9 +2,15 @@
 
 var BinBuild = require('bin-build');
 var BinWrapper = require('bin-wrapper');
-var chalk = require('chalk');
 var fs = require('fs');
+var logSymbols = require('log-symbols');
 var path = require('path');
+
+/**
+ * Variables
+ */
+
+var BIN_VERSION = '1.0.1';
 
 /**
  * Initialize a new BinWrapper
@@ -21,18 +27,16 @@ var bin = new BinWrapper ({ global: false })
 fs.exists(bin.use(), function (exists) {
     if (!exists) {
         var builder = new BinBuild()
-            .src('https://github.com/mozilla/mozjpeg/archive/v1.0.1.tar.gz')
+            .src('https://github.com/mozilla/mozjpeg/archive/v' + BIN_VERSION + '.tar.gz')
             .cfg('autoreconf -fiv && ./configure --prefix="' + bin.dest() + '" --bindir="' + bin.dest() + '" --libdir="' + bin.dest() + '"')
             .make('make && make install');
 
-        console.log('building mozjpeg');
-
         return builder.build(function (err) {
             if (err) {
-                return console.log(chalk.red('✗ ' + err));
+                console.log(logSymbols.error, err);
             }
 
-            console.log(chalk.green('✓ mozjpeg built successfully'));
+            console.log(logSymbols.success + ' mozjpeg built successfully!');
         });
     }
 });
