@@ -1,6 +1,6 @@
 {
   "name": "mozjpeg",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "mozjpeg wrapper that makes it seamlessly available as a local dependency",
   "license": "MIT",
   "repository": "kevva/mozjpeg",
