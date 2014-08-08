@@ -10,7 +10,7 @@ var path = require('path');
  * Variables
  */
 
-var BIN_VERSION = '1.0.1';
+var BIN_VERSION = '2.1';
 
 /**
  * Initialize a new BinWrapper
