@@ -21,7 +21,7 @@ describe('mozjpeg()', function () {
     it('should rebuild the mozjpeg binaries', function (cb) {
         var tmp = path.join(__dirname, 'tmp');
         var builder = new BinBuild()
-            .src('https://github.com/mozilla/mozjpeg/archive/v1.0.1.tar.gz')
+            .src('https://github.com/mozilla/mozjpeg/archive/v2.1.tar.gz')
             .cfg('autoreconf -fiv && ./configure --prefix="' + tmp + '" --bindir="' + tmp + '" --libdir="' + tmp + '"')
             .make('make && make install');
 
