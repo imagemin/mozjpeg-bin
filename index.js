@@ -11,14 +11,17 @@ var path = require('path');
  */
 
 var BIN_VERSION = '2.1';
+var BASE_URL = 'https://raw.github.com/kevva/mozjpeg/v' + pkg.version + '/vendor/';
 
 /**
  * Initialize a new BinWrapper
  */
 
-var bin = new BinWrapper ({ global: false })
+var bin = new BinWrapper({ global: false })
+    .src(BASE_URL + 'linux/jpegtran', 'linux')
+    .src(BASE_URL + 'win/jpegtran.exe', 'win32')
     .dest(path.join(__dirname, 'vendor'))
-    .use('jpegtran');
+    .use(process.platform === 'win32' ? 'jpegtran.exe' : 'jpegtran');
 
 /**
  * Only run check if binary doesn't already exist
