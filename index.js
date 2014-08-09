@@ -5,6 +5,7 @@ var BinWrapper = require('bin-wrapper');
 var fs = require('fs');
 var logSymbols = require('log-symbols');
 var path = require('path');
+var pkg = require('./package.json');
 
 /**
  * Variables
