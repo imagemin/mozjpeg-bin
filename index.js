@@ -42,12 +42,12 @@ fs.exists(bin.use(), function (exists) {
 
                     var builder = new BinBuild()
                         .src('https://github.com/mozilla/mozjpeg/archive/v' + BIN_VERSION + '.tar.gz')
-                        .cmd('autoreconf -fiv && ./configure --prefix="' + bin.dest() + '" --bindir="' + bin.dest() + '" --libdir="' + bin.dest() + '"')
+                        .cmd('autoreconf -fiv && ./configure --disable-shared --prefix="' + bin.dest() + '" --bindir="' + bin.dest() + '" --libdir="' + bin.dest() + '"')
                         .cmd('make && make install');
 
                     return builder.build(function (err) {
                         if (err) {
-                            console.log(logSymbols.error, err);
+                            return console.log(logSymbols.error, err);
                         }
 
                         console.log(logSymbols.success + ' mozjpeg built successfully!');
