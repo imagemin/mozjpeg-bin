@@ -22,8 +22,8 @@ describe('mozjpeg()', function () {
         var tmp = path.join(__dirname, 'tmp');
         var builder = new BinBuild()
             .src('https://github.com/mozilla/mozjpeg/archive/v2.1.tar.gz')
-            .cfg('autoreconf -fiv && ./configure --prefix="' + tmp + '" --bindir="' + tmp + '" --libdir="' + tmp + '"')
-            .make('make && make install');
+            .cmd('autoreconf -fiv && ./configure --prefix="' + tmp + '" --bindir="' + tmp + '" --libdir="' + tmp + '"')
+            .cmd('make && make install');
 
         builder.build(function (err) {
             assert(!err);
