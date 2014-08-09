@@ -30,18 +30,32 @@ var bin = new BinWrapper({ global: false })
 
 fs.exists(bin.use(), function (exists) {
     if (!exists) {
-        var builder = new BinBuild()
-            .src('https://github.com/mozilla/mozjpeg/archive/v' + BIN_VERSION + '.tar.gz')
-            .cfg('autoreconf -fiv && ./configure --prefix="' + bin.dest() + '" --bindir="' + bin.dest() + '" --libdir="' + bin.dest() + '"')
-            .make('make && make install');
+        var args = [
+            '-copy', 'none',
+            '-outfile', path.join(__dirname, 'test/fixtures/test-optimized.jpg'),
+            path.join(__dirname, 'test/fixtures/test.jpg')
+        ];
 
-        return builder.build(function (err) {
-            if (err) {
-                console.log(logSymbols.error, err);
-            }
+        bin.run(args, function (err) {
+                if (err) {
+                    console.log(logSymbols.warning + ' pre-build test failed, compiling from source...');
 
-            console.log(logSymbols.success + ' mozjpeg built successfully!');
-        });
+                    var builder = new BinBuild()
+                        .src('https://github.com/mozilla/mozjpeg/archive/v' + BIN_VERSION + '.tar.gz')
+                        .cmd('autoreconf -fiv && ./configure --prefix="' + bin.dest() + '" --bindir="' + bin.dest() + '" --libdir="' + bin.dest() + '"')
+                        .cmd('make && make install');
+
+                    return builder.build(function (err) {
+                        if (err) {
+                            console.log(logSymbols.error, err);
+                        }
+
+                        console.log(logSymbols.success + ' mozjpeg built successfully!');
+                    });
+                }
+
+                console.log(logSymbols.success + ' pre-build test passed successfully!');
+            });
     }
 });
 
