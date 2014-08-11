@@ -16,12 +16,13 @@
     "mozjpeg": "cli.js"
   },
   "scripts": {
-    "postinstall": "node index.js",
+    "postinstall": "node lib/install.js",
     "test": "mocha --reporter list --timeout 150000"
   },
   "files": [
     "cli.js",
     "index.js",
+    "lib",
     "test"
   ],
   "keywords": [
@@ -36,7 +37,7 @@
   ],
   "dependencies": {
     "bin-build": "^0.2.0",
-    "bin-wrapper": "^0.3.0",
+    "bin-wrapper": "^0.4.0",
     "log-symbols": "^1.0.0"
   },
   "devDependencies": {
