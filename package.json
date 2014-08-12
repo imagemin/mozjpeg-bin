@@ -3,7 +3,7 @@
   "version": "0.1.9",
   "description": "mozjpeg wrapper that makes it seamlessly available as a local dependency",
   "license": "MIT",
-  "repository": "kevva/mozjpeg",
+  "repository": "imagemin/mozjpeg-bin",
   "author": {
     "name": "Kevin Mårtensson",
     "email": "kevinmartensson@gmail.com",
