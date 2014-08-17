@@ -4,7 +4,7 @@
 
 ## Install
 
-```bash
+```sh
 $ npm install --save mozjpeg
 ```
 
@@ -21,11 +21,11 @@ execFile(mozjpeg, ['-v'], function (err, stdout, stderr) {
 
 ## CLI
 
-```bash
+```sh
 $ npm install --global mozjpeg
 ```
 
-```bash
+```sh
 $ mozjpeg --help
 ```
 
