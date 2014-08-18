@@ -2,11 +2,13 @@
 
 > mozjpeg is a production-quality JPEG encoder that improves compression while maintaining compatibility with the vast majority of deployed decoders
 
+
 ## Install
 
 ```sh
 $ npm install --save mozjpeg
 ```
+
 
 ## Usage
 
@@ -14,10 +16,15 @@ $ npm install --save mozjpeg
 var execFile = require('child_process').execFile;
 var mozjpeg = require('mozjpeg').path;
 
-execFile(mozjpeg, ['-v'], function (err, stdout, stderr) {
-    console.log('mozjpeg version:', stdout.match(/\d\.\d\.\d/)[0]);
+execFile(mozjpeg, ['-outfile', 'output.jpg', 'input.jpg'], function (err) {
+	if (err) {
+		throw err;
+	}
+
+	console.log('Image minified!');
 });
 ```
+
 
 ## CLI
 
@@ -29,6 +36,7 @@ $ npm install --global mozjpeg
 $ mozjpeg --help
 ```
 
+
 ## License
 
-MIT © [Kevin Mårtensson](http://kevinmartensson.com)
+MIT © [imagemin](https://github.com/imagemin)
