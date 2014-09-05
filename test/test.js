@@ -45,7 +45,6 @@ test('return path to binary and verify that it is working', function (t) {
 		binCheck(require('../').path, args, function (err, works) {
 			t.assert(!err);
 			t.assert(works);
-
 		});
 	});
 });
