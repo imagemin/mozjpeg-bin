@@ -1,61 +1,81 @@
-/*global afterEach, beforeEach, describe, it */
 'use strict';
 
-var assert = require('assert');
 var binCheck = require('bin-check');
 var BinBuild = require('bin-build');
 var execFile = require('child_process').execFile;
 var fs = require('fs');
+var mkdir = require('mkdirp');
 var path = require('path');
 var rm = require('rimraf');
+var test = require('ava');
+var tmp = path.join(__dirname, 'tmp');
 
-describe('mozjpeg()', function () {
-	afterEach(function (cb) {
-		rm(path.join(__dirname, 'tmp'), cb);
-	});
+test('rebuild the mozjpeg binaries', function (t) {
+	t.plan(3);
 
-	beforeEach(function () {
-		fs.mkdirSync(path.join(__dirname, 'tmp'));
-	});
+	var builder = new BinBuild()
+		.src('https://github.com/mozilla/mozjpeg/archive/v2.1.tar.gz')
+		.cmd('autoreconf -fiv && ./configure --prefix="' + tmp + '" --bindir="' + tmp + '" --libdir="' + tmp + '"')
+		.cmd('make && make install');
 
-	it('should rebuild the mozjpeg binaries', function (cb) {
-		var tmp = path.join(__dirname, 'tmp');
-		var builder = new BinBuild()
-			.src('https://github.com/mozilla/mozjpeg/archive/v2.1.tar.gz')
-			.cmd('autoreconf -fiv && ./configure --prefix="' + tmp + '" --bindir="' + tmp + '" --libdir="' + tmp + '"')
-			.cmd('make && make install');
+	builder.build(function (err) {
+		t.assert(!err);
 
-		builder.build(function (err) {
-			assert(!err);
-			assert(fs.existsSync(path.join(tmp, 'jpegtran')));
-			cb();
+		fs.exists(path.join(tmp, 'jpegtran'), function (exists) {
+			t.assert(exists);
+
+			rm(tmp, function (err) {
+				t.assert(!err);
+			});
 		});
 	});
+});
 
-	it('should return path to binary and verify that it is working', function (cb) {
-		var binPath = require('../').path;
-		var args = [
-			'-outfile', path.join(__dirname, 'tmp/test.jpg'),
-			path.join(__dirname, 'fixtures/test.jpg')
-		];
+test('return path to binary and verify that it is working', function (t) {
+	t.plan(3);
 
-		binCheck(binPath, args, function (err, works) {
-			cb(assert.equal(works, true));
+	var args = [
+		'-outfile', path.join(tmp, 'test.jpg'),
+		path.join(__dirname, 'fixtures/test.jpg')
+	];
+
+	mkdir(tmp, function (err) {
+		t.assert(!err);
+
+		binCheck(require('../').path, args, function (err, works) {
+			t.assert(!err);
+			t.assert(works);
+
 		});
 	});
+});
 
-	it('should minify a JPG', function (cb) {
-		var binPath = require('../').path;
-		var args = [
-			'-outfile', path.join(__dirname, 'tmp/test.jpg'),
-			path.join(__dirname, 'fixtures', 'test.jpg')
-		];
+test('minify a JPG', function (t) {
+	t.plan(6);
 
-		execFile(binPath, args, function () {
-			var src = fs.statSync(path.join(__dirname, 'fixtures/test.jpg')).size;
-			var dest = fs.statSync(path.join(__dirname, 'tmp/test.jpg')).size;
+	var args = [
+		'-outfile', path.join(tmp, 'test.jpg'),
+		path.join(__dirname, 'fixtures/test.jpg')
+	];
 
-			cb(assert(dest < src));
+	mkdir(tmp, function (err) {
+		t.assert(!err);
+
+		execFile(require('../').path, args, function (err) {
+			t.assert(!err);
+
+			fs.stat(path.join(__dirname, 'fixtures/test.jpg'), function (err, a) {
+				t.assert(!err);
+
+				fs.stat(path.join(tmp, 'test.jpg'), function (err, b) {
+					t.assert(!err);
+					t.assert(b.size < a.size);
+
+					rm(tmp, function (err) {
+						t.assert(!err);
+					});
+				});
+			});
 		});
 	});
 });

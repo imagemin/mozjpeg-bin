@@ -17,7 +17,7 @@
   },
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "mocha --reporter list --timeout 150000"
+    "test": "node test/test.js"
   },
   "files": [
     "cli.js",
@@ -41,8 +41,9 @@
     "log-symbols": "^1.0.0"
   },
   "devDependencies": {
+    "ava": "0.0.4",
     "bin-check": "^1.0.0",
-    "mocha": "^1.18.2",
+    "mkdirp": "^0.5.0",
     "rimraf": "^2.2.6"
   }
 }
