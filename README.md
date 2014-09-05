@@ -1,4 +1,4 @@
-# mozjpeg-bin [![Build Status](https://secure.travis-ci.org/imagemin/mozjpeg-bin.svg?branch=master)](http://travis-ci.org/imagemin/mozjpeg-bin)
+# mozjpeg-bin [![Build Status](http://img.shields.io/travis/imagemin/mozjpeg-bin/master.svg?style=flat)](http://travis-ci.org/imagemin/mozjpeg-bin) [![Build status](https://ci.appveyor.com/api/projects/status/iccr8j910llgf4pn)](https://ci.appveyor.com/project/kevva/mozjpeg-bin)
 
 > mozjpeg is a production-quality JPEG encoder that improves compression while maintaining compatibility with the vast majority of deployed decoders
 
