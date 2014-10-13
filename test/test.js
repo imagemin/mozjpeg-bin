@@ -12,6 +12,7 @@ var tmp = path.join(__dirname, 'tmp');
 test('rebuild the mozjpeg binaries', function (t) {
 	t.plan(2);
 
+	var version = require('../').version;
 	var cfg = [
 		'autoreconf -fiv && ./configure --disable-shared',
 		'--prefix="' + tmp + '" --bindir="' + tmp + '"',
@@ -19,7 +20,7 @@ test('rebuild the mozjpeg binaries', function (t) {
 	].join(' ');
 
 	var builder = new BinBuild()
-		.src('https://github.com/mozilla/mozjpeg/archive/v2.1.tar.gz')
+		.src('https://github.com/mozilla/mozjpeg/archive/v' + version + '.tar.gz')
 		.cmd(cfg)
 		.cmd('make && make install');
 
