@@ -17,7 +17,7 @@
   },
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "node test/test.js"
+    "test": "mkdir test/tmp && node test/test.js && rm -rf test/tmp"
   },
   "files": [
     "cli.js",
@@ -43,8 +43,6 @@
   "devDependencies": {
     "ava": "0.0.4",
     "bin-check": "^1.0.0",
-    "compare-size": "^1.0.1",
-    "mkdirp": "^0.5.0",
-    "rimraf": "^2.2.6"
+    "compare-size": "^1.0.1"
   }
 }
