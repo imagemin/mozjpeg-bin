@@ -24,7 +24,7 @@ test('rebuild the mozjpeg binaries', function (t) {
 		.cmd('make && make install');
 
 	builder.build(function (err) {
-		t.assert(!err);
+		t.assert(!err, err);
 
 		fs.exists(path.join(tmp, 'jpegtran'), function (exists) {
 			t.assert(exists);
@@ -41,7 +41,7 @@ test('return path to binary and verify that it is working', function (t) {
 	];
 
 	binCheck(require('../').path, args, function (err, works) {
-		t.assert(!err);
+		t.assert(!err, err);
 		t.assert(works);
 	});
 });
@@ -57,10 +57,10 @@ test('minify a JPG', function (t) {
 	];
 
 	execFile(require('../').path, args, function (err) {
-		t.assert(!err);
+		t.assert(!err, err);
 
 		compareSize(src, dest, function (err, res) {
-			t.assert(!err);
+			t.assert(!err, err);
 			t.assert(res[dest] < res[src]);
 		});
 	});
