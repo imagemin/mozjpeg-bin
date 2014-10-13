@@ -13,9 +13,15 @@ var tmp = path.join(__dirname, 'tmp');
 test('rebuild the mozjpeg binaries', function (t) {
 	t.plan(3);
 
+	var cfg = [
+		'autoreconf -fiv && ./configure --disable-shared',
+		'--prefix="' + tmp + '" --bindir="' + tmp + '"',
+		'--libdir="' + tmp + '"'
+	].join(' ');
+
 	var builder = new BinBuild()
 		.src('https://github.com/mozilla/mozjpeg/archive/v2.1.tar.gz')
-		.cmd('autoreconf -fiv && ./configure --prefix="' + tmp + '" --bindir="' + tmp + '" --libdir="' + tmp + '"')
+		.cmd(cfg)
 		.cmd('make && make install');
 
 	builder.build(function (err) {

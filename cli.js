@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-var binPath = require('./').path;
+var bin = require('./').path;
+var input = process.argv.slice(2);
 var spawn = require('child_process').spawn;
 
-spawn(binPath, process.argv.slice(2), { stdio: 'inherit' })
+spawn(bin, input, { stdio: 'inherit' })
 	.on('exit', process.exit);
