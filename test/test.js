@@ -2,6 +2,7 @@
 
 var binCheck = require('bin-check');
 var BinBuild = require('bin-build');
+var compareSize = require('compare-size');
 var execFile = require('child_process').execFile;
 var fs = require('fs');
 var mkdir = require('mkdirp');
@@ -58,9 +59,11 @@ test('return path to binary and verify that it is working', function (t) {
 test('minify a JPG', function (t) {
 	t.plan(6);
 
+	var src = path.join(__dirname, 'fixtures/test.jpg');
+	var dest = path.join(tmp, 'test.jpg');
 	var args = [
-		'-outfile', path.join(tmp, 'test.jpg'),
-		path.join(__dirname, 'fixtures/test.jpg')
+		'-outfile', dest,
+		src
 	];
 
 	mkdir(tmp, function (err) {
@@ -69,16 +72,12 @@ test('minify a JPG', function (t) {
 		execFile(require('../').path, args, function (err) {
 			t.assert(!err);
 
-			fs.stat(path.join(__dirname, 'fixtures/test.jpg'), function (err, a) {
+			compareSize(src, dest, function (err, res) {
 				t.assert(!err);
+				t.assert(res[dest] < res[src]);
 
-				fs.stat(path.join(tmp, 'test.jpg'), function (err, b) {
+				rm(tmp, function (err) {
 					t.assert(!err);
-					t.assert(b.size < a.size);
-
-					rm(tmp, function (err) {
-						t.assert(!err);
-					});
 				});
 			});
 		});
