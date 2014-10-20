@@ -14,13 +14,14 @@ test('rebuild the mozjpeg binaries', function (t) {
 
 	var version = require('../').version;
 	var cfg = [
-		'autoreconf -fiv && ./configure --disable-shared',
+		'./configure --disable-shared',
 		'--prefix="' + tmp + '" --bindir="' + tmp + '"',
 		'--libdir="' + tmp + '"'
 	].join(' ');
 
 	var builder = new BinBuild()
 		.src('https://github.com/mozilla/mozjpeg/archive/v' + version + '.tar.gz')
+		.cmd('autoreconf -fiv')
 		.cmd(cfg)
 		.cmd('make && make install');
 
