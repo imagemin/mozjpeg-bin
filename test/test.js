@@ -24,7 +24,7 @@ test('rebuild the mozjpeg binaries', function (t) {
 		.cmd(cfg)
 		.cmd('make && make install');
 
-	builder.build(function (err) {
+	builder.run(function (err) {
 		t.assert(!err, err);
 
 		fs.exists(path.join(tmp, 'jpegtran'), function (exists) {

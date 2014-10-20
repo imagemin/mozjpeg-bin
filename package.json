@@ -36,12 +36,12 @@
     "optimize"
   ],
   "dependencies": {
-    "bin-build": "^1.0.1",
-    "bin-wrapper": "^1.0.0",
+    "bin-build": "^2.0.0",
+    "bin-wrapper": "^2.0.1",
     "imagemin-log": "^1.0.0"
   },
   "devDependencies": {
-    "ava": "0.0.4",
+    "ava": "^0.0.4",
     "bin-check": "^1.0.0",
     "compare-size": "^1.0.1"
   }
