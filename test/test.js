@@ -28,7 +28,7 @@ test('rebuild the mozjpeg binaries', function (t) {
 	builder.run(function (err) {
 		t.assert(!err, err);
 
-		fs.exists(path.join(tmp, 'jpegtran'), function (exists) {
+		fs.exists(path.join(tmp, 'cjpeg'), function (exists) {
 			t.assert(exists);
 		});
 	});
