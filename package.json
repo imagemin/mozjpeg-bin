@@ -22,8 +22,7 @@
   "files": [
     "cli.js",
     "index.js",
-    "lib",
-    "test"
+    "lib"
   ],
   "keywords": [
     "jpeg",
