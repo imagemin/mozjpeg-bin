@@ -1,11 +1,11 @@
 'use strict';
 
-var binCheck = require('bin-check');
-var BinBuild = require('bin-build');
-var compareSize = require('compare-size');
 var execFile = require('child_process').execFile;
 var fs = require('fs');
 var path = require('path');
+var binCheck = require('bin-check');
+var BinBuild = require('bin-build');
+var compareSize = require('compare-size');
 var test = require('ava');
 var tmp = path.join(__dirname, 'tmp');
 
