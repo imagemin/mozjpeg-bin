@@ -1,2 +1,2 @@
 'use strict';
-module.exports.path = require('./lib').path();
+module.exports = require('./lib').path();

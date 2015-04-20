@@ -14,7 +14,7 @@ $ npm install --save mozjpeg
 
 ```js
 var execFile = require('child_process').execFile;
-var mozjpeg = require('mozjpeg').path;
+var mozjpeg = require('mozjpeg');
 
 execFile(mozjpeg, ['-outfile', 'output.jpg', 'input.jpg'], function (err) {
 	console.log('Image minified!');
