@@ -1,56 +1,58 @@
+/*global afterEach,beforeEach,it*/
 'use strict';
 
+var assert = require('assert');
 var execFile = require('child_process').execFile;
 var fs = require('fs');
 var path = require('path');
 var binCheck = require('bin-check');
 var BinBuild = require('bin-build');
 var compareSize = require('compare-size');
-var test = require('ava');
+var mkdirp = require('mkdirp');
+var rimraf = require('rimraf');
 var tmp = path.join(__dirname, 'tmp');
 
-test('rebuild the mozjpeg binaries', function (t) {
-	t.plan(2);
+beforeEach(function () {
+	mkdirp.sync(tmp);
+});
 
-	var version = require('../').version;
+afterEach(function () {
+	rimraf.sync(tmp);
+});
+
+it('rebuild the mozjpeg binaries', function (cb) {
 	var cfg = [
 		'./configure --disable-shared',
 		'--prefix="' + tmp + '" --bindir="' + tmp + '"',
 		'--libdir="' + tmp + '"'
 	].join(' ');
 
-	var builder = new BinBuild()
-		.src('https://github.com/mozilla/mozjpeg/archive/v' + version + '.tar.gz')
+	new BinBuild()
+		.src('https://github.com/mozilla/mozjpeg/archive/v3.0.tar.gz')
 		.cmd('autoreconf -fiv')
 		.cmd(cfg)
-		.cmd('make && make install');
-
-	builder.run(function (err) {
-		t.assert(!err, err);
-
-		fs.exists(path.join(tmp, 'cjpeg'), function (exists) {
-			t.assert(exists);
+		.cmd('make && make install')
+		.run(function (err) {
+			assert(!err);
+			assert(fs.statSync(path.join(tmp, 'cjpeg')).isFile());
+			cb();
 		});
-	});
 });
 
-test('return path to binary and verify that it is working', function (t) {
-	t.plan(2);
-
+it('return path to binary and verify that it is working', function (cb) {
 	var args = [
 		'-outfile', path.join(tmp, 'test.jpg'),
 		path.join(__dirname, 'fixtures/test.jpg')
 	];
 
 	binCheck(require('../').path, args, function (err, works) {
-		t.assert(!err, err);
-		t.assert(works);
+		assert(!err);
+		assert(works);
+		cb();
 	});
 });
 
-test('minify a JPG', function (t) {
-	t.plan(3);
-
+it('minify a JPG', function (cb) {
 	var src = path.join(__dirname, 'fixtures/test.jpg');
 	var dest = path.join(tmp, 'test.jpg');
 	var args = [
@@ -59,11 +61,12 @@ test('minify a JPG', function (t) {
 	];
 
 	execFile(require('../').path, args, function (err) {
-		t.assert(!err, err);
+		assert(!err);
 
 		compareSize(src, dest, function (err, res) {
-			t.assert(!err, err);
-			t.assert(res[dest] < res[src]);
+			assert(!err);
+			assert(res[dest] < res[src]);
+			cb();
 		});
 	});
 });
