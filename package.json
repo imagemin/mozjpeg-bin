@@ -7,21 +7,19 @@
   "author": {
     "name": "Kevin Mårtensson",
     "email": "kevinmartensson@gmail.com",
-    "url": "https://github.com/kevva"
+    "url": "github.com/kevva"
   },
   "engines": {
     "node": ">=0.10.0"
   },
-  "bin": {
-    "mozjpeg": "cli.js"
-  },
+  "bin": "cli.js",
   "scripts": {
     "postinstall": "node lib/install.js",
     "test": "mocha --timeout 100000"
   },
   "files": [
-    "cli.js",
     "index.js",
+    "cli.js",
     "lib"
   ],
   "keywords": [
