@@ -1,6 +1,6 @@
 {
   "name": "mozjpeg",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "mozjpeg wrapper that makes it seamlessly available as a local dependency",
   "license": "MIT",
   "repository": "imagemin/mozjpeg-bin",
