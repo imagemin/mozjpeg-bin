@@ -38,7 +38,7 @@
     "logalot": "^2.0.0"
   },
   "devDependencies": {
-    "bin-check": "^1.0.0",
+    "bin-check": "^2.0.0",
     "compare-size": "^1.0.1",
     "mkdirp": "^0.5.0",
     "mocha": "^2.2.4",
