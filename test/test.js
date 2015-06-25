@@ -28,7 +28,7 @@ it('rebuild the mozjpeg binaries', function (cb) {
 	].join(' ');
 
 	new BinBuild()
-		.src('https://github.com/mozilla/mozjpeg/archive/v3.0.tar.gz')
+		.src('https://github.com/mozilla/mozjpeg/archive/v3.1.tar.gz')
 		.cmd('autoreconf -fiv')
 		.cmd(cfg)
 		.cmd('make && make install')
