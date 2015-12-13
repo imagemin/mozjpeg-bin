@@ -4,6 +4,7 @@
 var assert = require('assert');
 var execFile = require('child_process').execFile;
 var fs = require('fs');
+var os = require('os');
 var path = require('path');
 var binCheck = require('bin-check');
 var BinBuild = require('bin-build');
@@ -12,12 +13,14 @@ var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 var tmp = path.join(__dirname, 'tmp');
 
-beforeEach(function () {
-	mkdirp.sync(tmp);
+var cpuNum = os.cpus().length;
+
+beforeEach(function (cb) {
+	mkdirp(tmp, cb);
 });
 
-afterEach(function () {
-	rimraf.sync(tmp);
+afterEach(function (cb) {
+	rimraf(tmp, {disableGlob: true}, cb);
 });
 
 it('rebuild the mozjpeg binaries', function (cb) {
@@ -31,9 +34,14 @@ it('rebuild the mozjpeg binaries', function (cb) {
 		.src('https://github.com/mozilla/mozjpeg/archive/v3.1.tar.gz')
 		.cmd('autoreconf -fiv')
 		.cmd(cfg)
-		.cmd('make && make install')
+		.cmd('make --jobs=' + String(cpuNum))
+		.cmd('make install --jobs=' + String(cpuNum))
 		.run(function (err) {
-			assert(!err);
+			if (err) {
+				cb(err);
+				return;
+			}
+
 			assert(fs.statSync(path.join(tmp, 'cjpeg')).isFile());
 			cb();
 		});
@@ -46,7 +54,11 @@ it('return path to binary and verify that it is working', function (cb) {
 	];
 
 	binCheck(require('../'), args, function (err, works) {
-		assert(!err);
+		if (err) {
+			cb(err);
+			return;
+		}
+
 		assert(works);
 		cb();
 	});
@@ -61,10 +73,17 @@ it('minify a JPG', function (cb) {
 	];
 
 	execFile(require('../'), args, function (err) {
-		assert(!err);
+		if (err) {
+			cb(err);
+			return;
+		}
 
 		compareSize(src, dest, function (err, res) {
-			assert(!err);
+			if (err) {
+				cb(err);
+				return;
+			}
+
 			assert(res[dest] < res[src]);
 			cb();
 		});
