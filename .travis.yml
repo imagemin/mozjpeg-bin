@@ -1,7 +1,9 @@
+sudo: false
 language: node_js
 node_js:
-  - 'iojs'
+  - 'stable'
   - '0.12'
   - '0.10'
-before_install:
-  - 'sudo apt-get install -qqy autoconf automake libtool nasm'
+addons:
+  apt:
+    packages: nasm
