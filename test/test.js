@@ -31,7 +31,7 @@ it('rebuild the mozjpeg binaries', function (cb) {
 	].join(' ');
 
 	new BinBuild()
-		.src('https://github.com/mozilla/mozjpeg/archive/v3.1.tar.gz')
+		.src('https://github.com/mozilla/mozjpeg/releases/download/v3.1/mozjpeg-3.1-release-source.tar.gz')
 		.cmd('autoreconf -fiv')
 		.cmd(cfg)
 		.cmd('make --jobs=' + String(cpuNum))
