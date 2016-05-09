@@ -26,7 +26,7 @@
   "bin": "cli.js",
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "xo && mocha --timeout 100000"
+    "test": "xo && mocha"
   },
   "files": [
     "index.js",

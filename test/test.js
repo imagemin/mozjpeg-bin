@@ -24,6 +24,8 @@ afterEach(function (cb) {
 });
 
 it('rebuild the mozjpeg binaries', function (cb) {
+	this.timeout(150000);
+
 	var cfg = [
 		'./configure --disable-shared --disable-dependency-tracking --with-jpeg8',
 		'--prefix="' + tmp + '" --bindir="' + tmp + '"',
