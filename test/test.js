@@ -25,7 +25,7 @@ afterEach(function (cb) {
 
 it('rebuild the mozjpeg binaries', function (cb) {
 	var cfg = [
-		'./configure --disable-shared --disable-dependency-tracking',
+		'./configure --disable-shared --disable-dependency-tracking --with-jpeg8',
 		'--prefix="' + tmp + '" --bindir="' + tmp + '"',
 		'--libdir="' + tmp + '"'
 	].join(' ');
