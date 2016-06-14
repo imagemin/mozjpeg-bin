@@ -13,10 +13,10 @@ $ npm install --save mozjpeg
 ## Usage
 
 ```js
-var execFile = require('child_process').execFile;
-var mozjpeg = require('mozjpeg');
+const {execFile} = require('child_process');
+const mozjpeg = require('mozjpeg');
 
-execFile(mozjpeg, ['-outfile', 'output.jpg', 'input.jpg'], function (err) {
+execFile(mozjpeg, ['-outfile', 'output.jpg', 'input.jpg'], err => {
 	console.log('Image minified!');
 });
 ```

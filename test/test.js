@@ -1,6 +1,5 @@
 /* eslint-env mocha */
 'use strict';
-
 var assert = require('assert');
 var execFile = require('child_process').execFile;
 var fs = require('fs');
@@ -12,7 +11,6 @@ var compareSize = require('compare-size');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
 var tmp = path.join(__dirname, 'tmp');
-
 var cpuNum = os.cpus().length;
 
 beforeEach(function (cb) {
