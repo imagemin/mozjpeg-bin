@@ -5,8 +5,8 @@ os:
   - osx
 osx_image: xcode8.2
 node_js:
-  - 6
-  - 4
+  - '6'
+  - '4'
 addons:
   apt:
     packages: nasm
