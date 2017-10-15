@@ -10,7 +10,15 @@ const BinBuild = require('bin-build');
 const compareSize = require('compare-size');
 const mozjpeg = require('..');
 
-const cpuNum = os.cpus().length;
+const cpus = os.cpus();
+
+if(!typeof cpus === 'undefined') {
+	const cpuNum = os.cpus().length;
+}
+else {
+	// We assume at least 1 CPU
+	const cpuNum = 1;
+}
 
 test.cb('rebuild the mozjpeg binaries', t => {
 	const tmp = tempy.directory();
