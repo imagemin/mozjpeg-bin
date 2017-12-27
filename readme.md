@@ -8,7 +8,7 @@ You probably want [`imagemin-mozjpeg`](https://github.com/imagemin/imagemin-mozj
 ## Install
 
 ```
-$ npm install --save mozjpeg
+$ npm install mozjpeg
 ```
 
 
