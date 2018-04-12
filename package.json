@@ -1,6 +1,6 @@
 {
   "name": "mozjpeg",
-  "version": "5.0.0",
+  "version": "5.0.1-rc0",
   "description": "mozjpeg wrapper that makes it seamlessly available as a local dependency",
   "license": "MIT",
   "repository": "imagemin/mozjpeg-bin",
@@ -26,7 +26,8 @@
   },
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "xo && ava"
+    "test": "xo && ava",
+    "build-linux": "docker build -t imagemin/mozjpeg docker; docker run --rm -v $(pwd)/vendor/linux:/src/out imagemin/mozjpeg cp cjpeg /src/out"
   },
   "files": [
     "index.js",

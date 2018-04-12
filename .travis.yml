@@ -1,9 +1,10 @@
 language: node_js
 os:
-  #- linux
+  - linux
   - osx
 osx_image: xcode8
 node_js:
+  - 'node' # latest
   - '8'
   - '6'
   - '4'

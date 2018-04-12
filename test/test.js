@@ -15,7 +15,7 @@ const cpuNum = os.cpus().length;
 test.cb('rebuild the mozjpeg binaries', t => {
 	const tmp = tempy.directory();
 	const cfg = [
-		'./configure --disable-shared --disable-dependency-tracking --with-jpeg8',
+		'./configure --enable-static --disable-shared --disable-dependency-tracking --with-jpeg8',
 		`--prefix="${tmp}" --bindir="${tmp}" --libdir="${tmp}"`
 	].join(' ');
 
