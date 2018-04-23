@@ -6,7 +6,7 @@ const test = require('ava');
 const execa = require('execa');
 const tempy = require('tempy');
 const binCheck = require('bin-check');
-const BinBuild = require('bin-build');
+const binBuild = require('bin-build');
 const compareSize = require('compare-size');
 const mozjpeg = require('..');
 
@@ -19,17 +19,15 @@ test.cb('rebuild the mozjpeg binaries', t => {
 		`--prefix="${tmp}" --bindir="${tmp}" --libdir="${tmp}"`
 	].join(' ');
 
-	new BinBuild()
-		.src('https://github.com/mozilla/mozjpeg/releases/download/v3.1/mozjpeg-3.1-release-source.tar.gz')
-		.cmd('autoreconf -fiv')
-		.cmd(cfg)
-		.cmd(`make --jobs=${cpuNum}`)
-		.cmd(`make install --jobs=${cpuNum}`)
-		.run(err => {
-			t.ifError(err);
-			t.true(fs.existsSync(path.join(tmp, 'cjpeg')));
-			t.end();
-		});
+	binBuild.url('https://github.com/mozilla/mozjpeg/releases/download/v3.2/mozjpeg-3.2-release-source.tar.gz', [
+		'autoreconf -fiv',
+		cfg,
+		`make --jobs=${cpuNum}`,
+		`make install --jobs=${cpuNum}`
+	]).then(() => {
+		t.true(fs.existsSync(path.join(tmp, 'cjpeg')));
+		t.end();
+	});
 });
 
 test('return path to binary and verify that it is working', async t => {
