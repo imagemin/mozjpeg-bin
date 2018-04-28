@@ -5,9 +5,9 @@ RUN apt-get update \
     -yq --no-install-suggests --no-install-recommends --force-yes
 
 WORKDIR /src
-RUN wget --no-check-certificate https://github.com/mozilla/mozjpeg/releases/download/v3.2/mozjpeg-3.2-release-source.tar.gz
-RUN tar -xzvf mozjpeg-3.2-release-source.tar.gz
-WORKDIR /src/mozjpeg
+RUN wget --no-check-certificate https://github.com/mozilla/mozjpeg/archive/v3.3.1.tar.gz -O mozjpeg-3.3.1.tar.gz
+RUN tar -xzvf mozjpeg-3.3.1.tar.gz
+WORKDIR /src/mozjpeg-3.3.1
 
 RUN autoreconf -fiv \
     && ./configure LDFLAGS=-static libpng_LIBS='/usr/lib/x86_64-linux-gnu/libpng12.a -lz' --enable-static --disable-shared \
