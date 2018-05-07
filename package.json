@@ -26,7 +26,8 @@
   },
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "xo && ava"
+    "test": "xo && ava",
+    "build-linux": "docker build --tag imagemin/mozjpeg docker && docker run --rm --volume $(pwd)/vendor/linux:/src/out imagemin/mozjpeg cp cjpeg /src/out"
   },
   "files": [
     "index.js",
