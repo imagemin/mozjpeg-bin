@@ -24,9 +24,8 @@ test('rebuild the mozjpeg binaries', async t => {
 		cfg,
 		`make --jobs=${cpuNum}`,
 		`make install --jobs=${cpuNum}`
-	]);
-
-	t.true(fs.existsSync(path.join(tmp, 'cjpeg')));
+	])
+		.then(() => t.true(fs.existsSync(path.join(tmp, 'cjpeg'))));
 });
 
 test('return path to binary and verify that it is working', async t => {
@@ -38,7 +37,8 @@ test('minify a JPG', async t => {
 	const src = path.join(__dirname, 'fixtures/test.jpg');
 	const dest = path.join(tmp, 'test.jpg');
 	const args = [
-		'-outfile', dest,
+		'-outfile',
+		dest,
 		src
 	];
 
