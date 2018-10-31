@@ -24,8 +24,9 @@ test('rebuild the mozjpeg binaries', async t => {
 		cfg,
 		`make --jobs=${cpuNum}`,
 		`make install --jobs=${cpuNum}`
-	])
-		.then(() => t.true(fs.existsSync(path.join(tmp, 'cjpeg'))));
+	]);
+
+	t.true(fs.existsSync(path.join(tmp, 'cjpeg')));
 });
 
 test('return path to binary and verify that it is working', async t => {
