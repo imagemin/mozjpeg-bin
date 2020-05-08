@@ -16,7 +16,8 @@
 	"files": [
 		"index.js",
 		"cli.js",
-		"lib"
+		"lib",
+		"vendor/source"
 	],
 	"keywords": [
 		"imagemin",
