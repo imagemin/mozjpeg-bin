@@ -19,7 +19,7 @@ test('rebuild the mozjpeg binaries', async t => {
 		`--prefix="${tmp}" --bindir="${tmp}" --libdir="${tmp}"`
 	].join(' ');
 
-	await binBuild.url('https://github.com/mozilla/mozjpeg/releases/download/v3.2/mozjpeg-3.2-release-source.tar.gz', [
+	await binBuild.file(path.resolve(__dirname, '../vendor/source/mozjpeg.tar.gz'), [
 		'autoreconf -fiv',
 		cfg,
 		`make --jobs=${cpuNum}`,
