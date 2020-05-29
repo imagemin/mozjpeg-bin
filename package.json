@@ -6,11 +6,11 @@
 	"repository": "imagemin/mozjpeg-bin",
 	"bin": "cli.js",
 	"engines": {
-		"node": ">=6"
+		"node": ">=10"
 	},
 	"scripts": {
 		"postinstall": "node lib/install.js",
-		"test": "xo && ava",
+		"test": "xo && ava --timeout=120s",
 		"build-linux": "docker build --tag imagemin/mozjpeg docker && docker run --rm --volume $(pwd)/vendor/linux:/src/out imagemin/mozjpeg cp cjpeg /src/out"
 	},
 	"files": [
@@ -36,12 +36,12 @@
 		"logalot": "^2.1.0"
 	},
 	"devDependencies": {
-		"ava": "*",
+		"ava": "^3.8.0",
 		"bin-check": "^4.1.0",
 		"compare-size": "^3.0.0",
-		"execa": "^1.0.0",
-		"tempy": "^0.2.1",
-		"xo": "*"
+		"execa": "^4.0.0",
+		"tempy": "^0.5.0",
+		"xo": "^0.30.0"
 	},
 	"ava": {
 		"serial": true
