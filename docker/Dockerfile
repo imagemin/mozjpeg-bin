@@ -1,14 +1,19 @@
-FROM debian:8-slim
-
-RUN apt-get update \
-    && apt-get install autoconf libtool nasm libpng-dev automake pkg-config build-essential wget \
-    -yq --no-install-suggests --no-install-recommends --force-yes
-
-WORKDIR /src
-RUN wget --no-check-certificate https://github.com/mozilla/mozjpeg/archive/v3.3.1.tar.gz -O mozjpeg-3.3.1.tar.gz
-RUN tar -xzvf mozjpeg-3.3.1.tar.gz
-WORKDIR /src/mozjpeg-3.3.1
-
-RUN autoreconf -fiv \
-    && ./configure LDFLAGS=-static libpng_LIBS='/usr/lib/x86_64-linux-gnu/libpng12.a -lz' --enable-static --disable-shared \
-    && make -j8
+FROM docker.io/library/alpine:latest
+RUN apk --update --no-cache upgrade
+RUN apk add --no-cache \
+    build-base \
+    git \
+    nasm \
+    cmake \
+    autoconf automake libtool \
+    pkgconf \
+    curl \
+    libpng-dev libpng-static \
+    zlib-dev zlib-static
+RUN adduser -D builder
+WORKDIR /home/builder
+USER builder
+# Exact time of MozJPEG v4.1.1 commit
+ENV SOURCE_DATE_EPOCH 1660525997
+COPY /build.sh build.sh
+RUN ["/bin/sh", "build.sh"]
