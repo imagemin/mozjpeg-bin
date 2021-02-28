@@ -11,7 +11,7 @@
 	"scripts": {
 		"postinstall": "node lib/install.js",
 		"test": "xo && ava --timeout=120s",
-		"build-linux": "docker build --tag imagemin/mozjpeg docker && docker run --rm --volume $(pwd)/vendor/linux:/src/out imagemin/mozjpeg cp cjpeg /src/out"
+		"build-linux": "docker build --tag imagemin/mozjpeg docker/ && docker create --name mozjpeg_ctr imagemin/mozjpeg && docker cp mozjpeg_ctr:/home/builder/build/cjpeg-static ./vendor/linux/cjpeg && docker container rm mozjpeg_ctr"
 	},
 	"files": [
 		"index.js",
