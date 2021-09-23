@@ -11,6 +11,11 @@ You probably want [`imagemin-mozjpeg`](https://github.com/imagemin/imagemin-mozj
 $ npm install mozjpeg
 ```
 
+This package attempts to download a prebuilt binary on post install.
+This attempts to reach out to `raw.githubusercontent.com`. If you would rather pull this from an
+internal proxy, you can set `GITHUB_RAW_URL` on your environment to overwrite the url to your 
+internal proxy.
+
 
 ## Usage
 
