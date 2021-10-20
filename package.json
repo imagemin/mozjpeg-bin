@@ -4,9 +4,10 @@
 	"description": "mozjpeg wrapper that makes it seamlessly available as a local dependency",
 	"license": "MIT",
 	"repository": "imagemin/mozjpeg-bin",
+	"type": "module",
 	"bin": "cli.js",
 	"engines": {
-		"node": ">=10"
+		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
 	},
 	"scripts": {
 		"postinstall": "node lib/install.js",
@@ -38,9 +39,9 @@
 		"ava": "^3.8.0",
 		"bin-check": "^4.1.0",
 		"compare-size": "^3.0.0",
-		"execa": "^4.0.0",
-		"tempy": "^0.5.0",
-		"xo": "^0.30.0"
+		"execa": "^5.1.1",
+		"tempy": "^2.0.0",
+		"xo": "^0.45.0"
 	},
 	"ava": {
 		"serial": true
