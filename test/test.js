@@ -1,14 +1,14 @@
-'use strict';
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-const test = require('ava');
-const execa = require('execa');
-const tempy = require('tempy');
-const binCheck = require('bin-check');
-const binBuild = require('bin-build');
-const compareSize = require('compare-size');
-const mozjpeg = require('..');
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import test from 'ava';
+import execa from 'execa';
+import tempy from 'tempy';
+import binCheck from 'bin-check';
+import binBuild from 'bin-build';
+import compareSize from 'compare-size';
+import mozjpeg from '../index.js';
 
 const cpuNumber = os.cpus().length;
 
@@ -16,14 +16,15 @@ test('rebuild the mozjpeg binaries', async t => {
 	const temporary = tempy.directory();
 	const cfg = [
 		'./configure --enable-static --disable-shared --disable-dependency-tracking --with-jpeg8',
-		`--prefix="${temporary}" --bindir="${temporary}" --libdir="${temporary}"`
+		`--prefix="${temporary}" --bindir="${temporary}" --libdir="${temporary}"`,
 	].join(' ');
 
-	await binBuild.file(path.resolve(__dirname, '../vendor/source/mozjpeg.tar.gz'), [
+	const source = fileURLToPath(new URL('../vendor/source/mozjpeg.tar.gz', import.meta.url));
+	await binBuild.file(source, [
 		'autoreconf -fiv',
 		cfg,
 		`make --jobs=${cpuNumber}`,
-		`make install --jobs=${cpuNumber}`
+		`make install --jobs=${cpuNumber}`,
 	]);
 
 	t.true(fs.existsSync(path.join(temporary, 'cjpeg')));
@@ -35,12 +36,12 @@ test('return path to binary and verify that it is working', async t => {
 
 test('minify a JPG', async t => {
 	const temporary = tempy.directory();
-	const src = path.join(__dirname, 'fixtures/test.jpg');
+	const src = fileURLToPath(new URL('./fixtures/test.jpg', import.meta.url));
 	const dest = path.join(temporary, 'test.jpg');
 	const args = [
 		'-outfile',
 		dest,
-		src
+		src,
 	];
 
 	await execa(mozjpeg, args);
