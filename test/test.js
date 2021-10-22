@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import process from 'node:process';
 import {fileURLToPath} from 'node:url';
 import test from 'ava';
 import execa from 'execa';
@@ -13,6 +14,12 @@ import mozjpeg from '../index.js';
 const cpuNumber = os.cpus().length;
 
 test('rebuild the mozjpeg binaries', async t => {
+	// Skip the test on Windows
+	if (process.platform === 'win32') {
+		t.pass();
+		return;
+	}
+
 	const temporary = tempy.directory();
 	const cfg = [
 		'./configure --enable-static --disable-shared --disable-dependency-tracking --with-jpeg8',
