@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import {fileURLToPath} from 'node:url';
@@ -11,8 +10,6 @@ import binBuild from 'bin-build';
 import compareSize from 'compare-size';
 import mozjpeg from '../index.js';
 
-const cpuNumber = os.cpus().length;
-
 test('rebuild the mozjpeg binaries', async t => {
 	// Skip the test on Windows
 	if (process.platform === 'win32') {
@@ -21,17 +18,17 @@ test('rebuild the mozjpeg binaries', async t => {
 	}
 
 	const temporary = tempy.directory();
-	const cfg = [
-		'./configure --enable-static --disable-shared --disable-dependency-tracking --with-jpeg8',
-		`--prefix="${temporary}" --bindir="${temporary}" --libdir="${temporary}"`,
-	].join(' ');
-
+	const config = [];
 	const source = fileURLToPath(new URL('../vendor/source/mozjpeg.tar.gz', import.meta.url));
+
+	if (process.platform === 'darwin') {
+		config.push('-DCMAKE_PREFIX_PATH=$(brew --prefix libpng)');
+	}
+
 	await binBuild.file(source, [
-		'autoreconf -fiv',
-		cfg,
-		`make --jobs=${cpuNumber}`,
-		`make install --jobs=${cpuNumber}`,
+		`cmake -G"Unix Makefiles" ${config.join(' ')} .`,
+		'make',
+		`mv ./cjpeg ${temporary}`,
 	]);
 
 	t.true(fs.existsSync(path.join(temporary, 'cjpeg')));

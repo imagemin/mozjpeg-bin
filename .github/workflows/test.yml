@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - if: contains(matrix.os, 'ubuntu')
-        run: sudo apt-get install nasm
+        run: sudo apt-get install nasm libpng-dev
       - if: contains(matrix.os, 'macos')
         run: brew install automake nasm
       - uses: actions/setup-node@v2
