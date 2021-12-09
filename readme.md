@@ -11,6 +11,11 @@ You probably want [`imagemin-mozjpeg`](https://github.com/imagemin/imagemin-mozj
 $ npm install mozjpeg
 ```
 
+### Mirror
+
+Add `npm_config_mozjpeg_binary_host` to environment variables can modify the default binary download host. Default to: `https://raw.githubusercontent.com/imagemin/mozjpeg-bin`
+
+For example: `npm_config_mozjpeg_binary_host=https://foo.bar npm i mozjepg-bin`
 
 ## Usage
 
