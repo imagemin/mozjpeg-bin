@@ -1,0 +1,8 @@
+{
+  "name": "mozjpeg",
+  "version-string": "10.0.0",
+  "dependencies": [
+    "zlib",
+    "libpng"
+  ]
+}
