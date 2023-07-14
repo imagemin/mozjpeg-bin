@@ -8,7 +8,7 @@
 	"exports": "./index.js",
 	"bin": "cli.js",
 	"engines": {
-		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+		"node": "^16.20.0 || ^18.17.0 || >=20.0.0"
 	},
 	"scripts": {
 		"postinstall": "node lib/install.js",
@@ -34,14 +34,14 @@
 	],
 	"dependencies": {
 		"bin-build": "^3.0.0",
-		"bin-wrapper": "^4.0.0"
+		"bin-wrapper": "^4.1.0"
 	},
 	"devDependencies": {
-		"ava": "^3.8.0",
+		"ava": "^4.3.3",
 		"bin-check": "^4.1.0",
 		"compare-size": "^3.0.0",
-		"execa": "^5.1.1",
-		"tempy": "^2.0.0",
+		"execa": "^7.1.1",
+		"tempy": "^3.1.0",
 		"xo": "^0.45.0"
 	},
 	"ava": {
